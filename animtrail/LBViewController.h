@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LBViewController : UIViewController
+@interface LBViewController : UIViewController <UIScrollViewDelegate>
 
 @end

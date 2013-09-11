@@ -94,7 +94,7 @@
 //    }
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView // called on finger up as we are moving
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     UIView *vOri = [scrollView viewWithTag:2];
 //    UIView *vShadow = [scrollView viewWithTag:3];
@@ -104,19 +104,19 @@
 //    vShadow = [scrollView viewWithTag:6];
 //    vShadow = [scrollView viewWithTag:7];
 //    vShadow = [scrollView viewWithTag:8];
-    
-            [UIView animateWithDuration:0.1
-                                  delay:0.1
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^{
-                                 for (int i = 3, delta = 2; i < 9; i++, delta+=2)
-                                 {
-                                     UIView *vShadow = [scrollView viewWithTag:i];
-                                     vShadow.frame = CGRectMake(vOri.frame.origin.x + delta, vShadow.frame.origin.y, vShadow.frame.size.width, vShadow.frame.size.height);
-                                 }
+
+    for (int i = 3, delay = 0.1, delta = 2; i < 9; i++, delta+=2, delay+=0.1)
+    {
+        [UIView animateWithDuration:0.1
+                              delay:delay
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                                 UIView *vShadow = [scrollView viewWithTag:i];
+                                 vShadow.frame = CGRectMake(vOri.frame.origin.x + delta, vShadow.frame.origin.y, vShadow.frame.size.width, vShadow.frame.size.height);
                              }
-                             completion:^(BOOL f){
-                             }];
+                         completion:^(BOOL f){
+                         }];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
